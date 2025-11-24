@@ -102,8 +102,6 @@ modbus_tcp_lab/
 
 ### Input Registers (Sensores - Solo Lectura)
 
-![Input Registers](docs/variables_input_registers.png)
-
 | Variable | Dirección | Valor | Unidad | Rango |
 |----------|-----------|-------|--------|-------|
 | Temperatura 1 | IR0 (30001) | 25.5 | °C | 0-50 |
