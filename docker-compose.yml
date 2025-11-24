@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  # Servidor Modbus TCP (Simula PLC/Dispositivo Industrial)
+  modbus-server:
+    build: ./modbus-server
+    container_name: modbus-tcp-server
+    hostname: modbus-server
+    networks:
+      modbus_network:
+        ipv4_address: 172.25.0.10
+    ports:
+      - "5020:502"
+    environment:
+      - MODBUS_PORT=502
+    restart: unless-stopped
+
+  # Cliente Modbus (Dispositivo adicional)
+  modbus-client:
+    build: ./modbus-client
+    container_name: modbus-client-device
+    hostname: modbus-client
+    networks:
+      modbus_network:
+        ipv4_address: 172.25.0.11
+    depends_on:
+      - modbus-server
+    environment:
+      - MODBUS_SERVER=modbus-server
+      - MODBUS_PORT=502
+    restart: unless-stopped
+
+  # SCADA/HMI - Sistema de Visualización (FUXA)
+  scada-hmi:
+    image: frangoteam/fuxa:latest
+    container_name: scada-hmi
+    hostname: scada-hmi
+    networks:
+      modbus_network:
+        ipv4_address: 172.25.0.20
+    ports:
+      - "1881:1881"
+    volumes:
+      - ./scada-hmi/data:/usr/src/app/FUXA/server/_appdata
+      - ./scada-hmi/db:/usr/src/app/FUXA/server/_db
+    environment:
+      - NODE_ENV=production
+      - FUXA_ALLOW_ORIGIN=*
+      - FUXA_BROADCAST_ALL=true
+    depends_on:
+      - modbus-server
+    restart: unless-stopped
+
+  # Node-RED - Interfaz alternativa más simple
+  nodered:
+    image: nodered/node-red:latest
+    container_name: nodered
+    hostname: nodered
+    networks:
+      modbus_network:
+        ipv4_address: 172.25.0.21
+    ports:
+      - "1880:1880"
+    volumes:
+      - ./nodered/data:/data
+    environment:
+      - TZ=America/Bogota
+    depends_on:
+      - modbus-server
+    restart: unless-stopped
+
+networks:
+  modbus_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.25.0.0/24
+          gateway: 172.25.0.1
+
+volumes:
+  scada_data:
+  kali_tools:
+  captures:
