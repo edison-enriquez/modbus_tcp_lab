@@ -43,41 +43,9 @@ cd /mnt/HC_Volume_102919965/modbus_tcp_lab
 
 ## 🏗️ Arquitectura del Sistema
 
-```mermaid
-graph TB
-    subgraph "Red Docker: modbus_network (172.25.0.0/24)"
-        subgraph "Servidor PLC"
-            PLC[🏭 Modbus Server<br/>172.25.0.10:502<br/>Puerto Host: 5020]
-        end
-        
-        subgraph "Interfaces de Visualización"
-            NR[📊 Node-RED Dashboard<br/>172.25.0.21:1880<br/>Puerto Host: 1880]
-            FUXA[🖥️ FUXA SCADA<br/>172.25.0.20:1881<br/>Puerto Host: 1881]
-        end
-        
-        subgraph "Monitoreo"
-            CLIENT[📡 Modbus Client<br/>172.25.0.11<br/>Lee cada 10s]
-        end
-        
-        PLC -->|Modbus TCP<br/>FC3/FC4| NR
-        PLC -->|Modbus TCP| FUXA
-        PLC -->|Modbus TCP<br/>Polling| CLIENT
-    end
-    
-    subgraph "Acceso Externo"
-        USER[👨‍💻 Usuario<br/>65.109.226.13]
-    end
-    
-    USER -->|HTTP :1880/ui| NR
-    USER -->|HTTP :1881| FUXA
-    USER -->|Modbus :5020| PLC
-    
-    style PLC fill:#ff9999,stroke:#ff0000,stroke-width:3px
-    style NR fill:#99ff99,stroke:#00ff00,stroke-width:3px
-    style FUXA fill:#ffff99,stroke:#ffaa00,stroke-width:2px
-    style CLIENT fill:#99ccff,stroke:#0066cc,stroke-width:2px
-    style USER fill:#cc99ff,stroke:#9900ff,stroke-width:2px
-```
+> **Diagrama generado con Python Diagrams** - Ver código en [`generate_diagrams.py`](generate_diagrams.py)
+
+![Arquitectura Modbus TCP](docs/arquitectura_modbus.png)
 
 ### Componentes del Sistema
 
@@ -130,22 +98,11 @@ modbus_tcp_lab/
 
 ## 🔧 Variables Modbus Disponibles
 
+> **Diagramas generados con Python Diagrams** - Ver código en [`generate_diagrams.py`](generate_diagrams.py)
+
 ### Input Registers (Sensores - Solo Lectura)
 
-```mermaid
-graph LR
-    subgraph "Input Registers - FC4 (Read Input Registers)"
-        IR0[📊 IR0: 30001<br/>Temperatura 1<br/>25.5°C]
-        IR1[📊 IR1: 30002<br/>Temperatura 2<br/>30.0°C]
-        IR2[📊 IR2: 30003<br/>Presión<br/>15.0 bar]
-        IR3[📊 IR3: 30004<br/>Nivel Tanque<br/>75.0%]
-    end
-    
-    style IR0 fill:#ffcccc
-    style IR1 fill:#ffcccc
-    style IR2 fill:#ccffcc
-    style IR3 fill:#ccccff
-```
+![Input Registers](docs/variables_input_registers.png)
 
 | Variable | Dirección | Valor | Unidad | Rango |
 |----------|-----------|-------|--------|-------|
@@ -156,20 +113,7 @@ graph LR
 
 ### Holding Registers (Setpoints - Lectura/Escritura)
 
-```mermaid
-graph LR
-    subgraph "Holding Registers - FC3 (Read) / FC6 (Write Single) / FC16 (Write Multiple)"
-        HR0[⚙️ HR0: 40001<br/>SP Temperatura<br/>20.0°C]
-        HR1[⚙️ HR1: 40002<br/>SP Nivel<br/>50.0%]
-        HR2[⚙️ HR2: 40003<br/>Tiempo Ciclo<br/>100 ms]
-        HR3[⚙️ HR3: 40004<br/>Modo<br/>AUTO]
-    end
-    
-    style HR0 fill:#ffffcc
-    style HR1 fill:#ffffcc
-    style HR2 fill:#ffccff
-    style HR3 fill:#ccffff
-```
+![Holding Registers](docs/variables_holding_registers.png)
 
 | Variable | Dirección | Valor Inicial | Unidad | Descripción |
 |----------|-----------|---------------|--------|-------------|

@@ -51,3 +51,12 @@ Thumbs.db
 # Node modules
 node_modules/
 nodered/data/node_modules/
+
+# Diagrams library cache
+__pycache__/
+
+# Node-RED backups y cache
+nodered/data/.config.*.backup
+nodered/data/.flows.json.backup
+nodered/data/package-lock.json
+nodered/data/settings.js
