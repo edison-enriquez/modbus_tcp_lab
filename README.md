@@ -111,7 +111,8 @@ modbus_tcp_lab/
 
 ### Holding Registers (Setpoints - Lectura/Escritura)
 
-![Holding Registers](docs/variables_holding_registers.png)
+
+\!\[Holding Registers](docs/variables_holding_registers.png)
 
 | Variable | Dirección | Valor Inicial | Unidad | Descripción |
 |----------|-----------|---------------|--------|-------------|
