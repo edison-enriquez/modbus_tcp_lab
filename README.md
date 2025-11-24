@@ -45,7 +45,7 @@ cd /mnt/HC_Volume_102919965/modbus_tcp_lab
 
 > **Diagrama generado con Python Diagrams** - Ver código en [`generate_diagrams.py`](generate_diagrams.py)
 
-<!-- ![Arquitectura Modbus TCP](docs/arquitectura_modbus.png) -->
+\!\[Arquitectura Modbus TCP](docs/arquitectura_modbus.png).png) -->
 
 ### Componentes del Sistema
 
