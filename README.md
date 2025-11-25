@@ -156,6 +156,46 @@ docker-compose down
 
 ---
 
+## 📓 Notebooks Interactivos
+
+Este laboratorio incluye **3 notebooks Jupyter** para aprendizaje práctico:
+
+### 1. `tutorial_pymodbus.ipynb` - Introducción a PyModbus
+- 🎓 **Nivel**: Principiante
+- 📝 **Contenido**: Tutorial paso a paso de PyModbus desde cero
+- 🔧 **Temas**: Instalación, conexión, lectura/escritura de registros, manejo de errores
+
+### 2. `modbus_interaccion.ipynb` - Análisis con PyShark
+- 🎓 **Nivel**: Intermedio
+- 📝 **Contenido**: Interacción avanzada con análisis de paquetes
+- 🔧 **Temas**: PyModbus + PyShark, captura PCAP, monitoreo en tiempo real, exportación CSV/JSON
+
+### 3. `modbus_externo_scapy.ipynb` - Conexión Externa + Scapy
+- 🎓 **Nivel**: Avanzado
+- 📝 **Contenido**: Conexión externa al servidor con análisis profundo de tramas
+- 🔧 **Temas**: 
+  - Teoría del protocolo Modbus TCP
+  - Tipos de registros (Input Registers, Holding Registers)
+  - Estructura de trama (MBAP Header + PDU)
+  - Captura de paquetes con Scapy
+  - Decodificación byte por byte
+  - Construcción manual de paquetes
+  - Exportación a PCAP
+
+### 🚀 Cómo usar los notebooks
+
+```bash
+# Instalar Jupyter
+pip install jupyter
+
+# Ejecutar Jupyter
+jupyter notebook
+
+# Abrir cualquiera de los notebooks y seguir las instrucciones
+```
+
+---
+
 ## 🐛 Troubleshooting
 
 ### Dashboard vacío
